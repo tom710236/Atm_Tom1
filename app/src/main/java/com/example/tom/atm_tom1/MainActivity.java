@@ -1,6 +1,7 @@
 package com.example.tom.atm_tom1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //先取得畫面上的帳號元件EditText 名稱為edUseid
+        EditText edUId = (EditText) findViewById(R.id.Id);
+        //取得儲存設定物件setting
+        SharedPreferences setting =
+                getSharedPreferences("atm",MODE_PRIVATE);
+        //設定uId的預設值
+        edUId.setText(setting.getString("uId",""));
     }
     //登入鍵
     public void onCLick (View v){
@@ -36,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
         else{
             //假如uId為Tom uWd為1234 TOAST顯示登入成功 並進入登入畫面
             if(uId.equals("Tom")&&uWd.equals("1234")){
+                //SharedPreferences可以將簡單資料儲存在手機中
+                /*
+                  呼叫getSharedPreferences的方法 產生一個檔名 atm.xml的設定
+                  儲存檔 並只供本專案讀取 物件名稱setting
+                 */
+                SharedPreferences setting = // 取得儲存設定物件setting
+                        getSharedPreferences("atm",MODE_PRIVATE);
+                /*
+                呼叫edit方法取得編譯器物件 使用匿名方法呼叫putString()
+                方法將uId字串的內容寫入設定檔 資料標籤為"uId"
+                最後呼叫commit()寫入到設定檔
+                */
+                setting.edit()
+                        .putString("uId",uId)
+                        .commit();
                 Toast.makeText(this,"登入成功",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this,LoginActivity.class);
                 startActivity(intent);
