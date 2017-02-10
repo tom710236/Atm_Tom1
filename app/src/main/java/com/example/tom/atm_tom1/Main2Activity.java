@@ -28,7 +28,7 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
                 new ArrayAdapter(this,android.R.layout.simple_list_item_1,func);
         //呼叫ListView的setAdapter設定adapter來啟動
         grid.setAdapter(gAdater);
-        //事件處理-實作傾聽者介面 (alt+enter 加入Make 'MainActivity'....)
+        //事件處理-實作傾聽者介面 讓按鍵有作用 (alt+enter 加入Make 'MainActivity'....)
         grid.setOnItemClickListener(this);
     }
     //事件處理-實作傾聽者介面的必要方法 參數是position即是按下項目的索引值
