@@ -1,7 +1,8 @@
 package com.example.tom.atm_tom1;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,8 +10,8 @@ import android.widget.GridView;
 
 public class Main2Activity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     //先以字串陣列方式將功能儲存 func陣列
-    String [] func = {"餘額查詢","交易明細","最新消息","投資理財",
-            "離開"};
+    String [] func = {"餘額查詢","交易明細","最新消息","投資理財"
+            ,"下一頁","離開"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
         //事件處理-實作傾聽者介面 (alt+enter 加入Make 'MainActivity'....)
         grid.setOnItemClickListener(this);
     }
-    //必要方法 參數是position即是按下項目的索引值
+    //事件處理-實作傾聽者介面的必要方法 參數是position即是按下項目的索引值
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
@@ -43,6 +44,10 @@ public class Main2Activity extends AppCompatActivity implements AdapterView.OnIt
             case 3:
                 break;
             case 4:
+                Intent intent = new Intent(this,Main3Activity.class);
+                startActivity(intent);
+                break;
+            case 5:
                 finish();
                 break;
         }

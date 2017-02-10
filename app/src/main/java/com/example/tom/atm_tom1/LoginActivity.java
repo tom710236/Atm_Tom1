@@ -10,10 +10,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     //先以字串陣列方式將功能儲存在LoginActivity func陣列
     String [] func = {"餘額查詢","交易明細","最新消息","投資理財",
-            "離開"};
+            "下一頁","離開"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,9 @@ public class LoginActivity extends AppCompatActivity {
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,func);
         //呼叫ListView的setAdapter設定adapter來啟動
         list.setAdapter(adapter);
+        //事件處理-實作傾聽者介面 (alt+enter 加入Make 'MainActivity'....)
+        list.setOnItemClickListener(this);
+
 
         //取得Spinner
         Spinner notify = (Spinner)findViewById(R.id.spinner);
@@ -42,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         final ArrayAdapter<CharSequence> nadapter =
                 ArrayAdapter.createFromResource(this,R.array.notify_array,
                         android.R.layout.simple_spinner_dropdown_item);
-        //另外改版面
+        //另外要改版面的話 可用setDropDownViewResource
         //nadapter.setDropDownViewResource(
                 //android.R.layout.simple_spinner_dropdown_item);
         //將nadapter設定至Spinner元件中
@@ -79,9 +82,26 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void onClick (View v){
-        Intent intent = new Intent(this,Main2Activity.class);
-        startActivity(intent);
 
+    //事件處理-實作傾聽者介面的必要方法 參數是position即是按下項目的索引值
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        switch (position){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                Intent intent = new Intent(this,Main2Activity.class);
+                startActivity(intent);
+                break;
+            case 5:
+                finish();
+                break;
+        }
     }
 }
