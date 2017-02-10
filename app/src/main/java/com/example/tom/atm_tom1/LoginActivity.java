@@ -2,8 +2,12 @@ package com.example.tom.atm_tom1;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     //先以字串陣列方式將功能儲存在LoginActivity func陣列
@@ -22,8 +26,56 @@ public class LoginActivity extends AppCompatActivity {
         第三個參數 本例的字串陣列
          */
         ArrayAdapter adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,func);
-        //
+        //呼叫ListView的setAdapter設定adapter來啟動
         list.setAdapter(adapter);
+
+        //取得Spinner
+        Spinner notify = (Spinner)findViewById(R.id.spinner);
+        /*
+        先準備字串陣列資料(values/array.xml)
+        使用ArrayAdapter的類別方法creatFormResource直接產生一個
+        ArratAdpter<CharSequence>
+        參數1 Context(this) 參數2 陣列資源的ID值(R.arrat.notify_array)
+        參數3 清單顯示時所用的版面配置
+         */
+        final ArrayAdapter<CharSequence> nadapter =
+                ArrayAdapter.createFromResource(this,R.array.notify_array,
+                        android.R.layout.simple_spinner_dropdown_item);
+        //另外改版面
+        //nadapter.setDropDownViewResource(
+                //android.R.layout.simple_spinner_dropdown_item);
+        //將nadapter設定至Spinner元件中
+        notify.setAdapter(nadapter);
+        //選擇項目的事件處理(選擇清單的某一項目 來進行一些程式設計)
+        /*
+        AdapterView.OnItemSelectedListener(當項目選擇時的傾聽器)
+        使用匿名類別設計
+        當選擇某一項目 自動執行onItemSelected
+        未選擇 執行onNothing Selected
+         */
+        notify.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener(){
+
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(LoginActivity.this,
+                                nadapter.getItem(position),
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                }
+        );
+
+        /*
+        欲取得Spinner元件中選擇的項目時 可使用 getSelectedItem
+        回傳值Object 如果是字串可再呼叫toString
+        String text = notify.getSelectedItem().toString();
+         */
+
 
     }
 }
