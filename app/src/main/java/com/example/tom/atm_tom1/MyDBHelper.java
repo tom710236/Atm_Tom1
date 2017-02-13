@@ -13,8 +13,15 @@ import android.database.sqlite.SQLiteOpenHelper;
     */
 
 public class MyDBHelper extends SQLiteOpenHelper{
+    private  static  MyDBHelper instance = null;//防資料庫被鎖死
+    public static MyDBHelper getInstance(Context ctx){ //防資料庫被鎖死
+        if(instance==null){
+            instance = new MyDBHelper(ctx,"expense.db",null,1);
+        }
+        return instance;
+    }
     //並未實作無參數的建構子因此必須設計建構子
-    public MyDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    private MyDBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
     //SQLiteOpenHelper是抽象類別 其子類別必須實作必要方法 alt+enter

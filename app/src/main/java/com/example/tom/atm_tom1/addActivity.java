@@ -28,7 +28,8 @@ public class addActivity extends AppCompatActivity {
         MyDBHelper(Context context,String name,CursorFactory factory,int version)
                   (this(傳入addActivity),資料庫檔案名稱(自訂),標準模式處理(null),目前資料庫版本(1代表第一個版本))
          */
-        helper = new MyDBHelper(this,"expense.db",null,1);
+        //helper = new MyDBHelper(this,"expense.db",null,1);
+        helper = MyDBHelper.getInstance(this);//防資料庫被鎖死
     }
     //將消費紀錄儲存在一個ContentValues物件 再呼叫SQLiteDatabase
     //的insert方法新增紀錄

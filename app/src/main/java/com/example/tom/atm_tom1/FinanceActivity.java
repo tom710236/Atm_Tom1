@@ -28,7 +28,8 @@ public class FinanceActivity extends AppCompatActivity {
         //取得
         list = (ListView)findViewById(R.id.list);
         //產生MyDBHelper物件 並查詢exp表格
-        helper = new MyDBHelper(this,"expense.db",null,1);
+        //helper = new MyDBHelper(this,"expense.db",null,1);
+        helper = MyDBHelper.getInstance(this);//防資料庫被鎖死
         //呼叫MyDBHelper建構子得到物件在查詢 最後得到Cursor物件
         c=helper.getReadableDatabase().query("exp",null,null,null,null,null,null);
         //Adapter曾介紹ListView的資料來源若是查詢結果為Cursor
@@ -41,10 +42,13 @@ public class FinanceActivity extends AppCompatActivity {
         int[]to 畫面中的資源ID陣列
          */
         adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_expandable_list_item_2,
+                //android.R.layout.simple_expandable_list_item_2,
+                R.layout.finance_row,
                 c,
-                new String[] {"info","amount"},
-                new int[] {android.R.id.text1,android.R.id.text2},
+                //new String[] {"info","amount"},
+                new String[] {"_id","cdate","info","amount"},
+                //new int[] {android.R.id.text1,android.R.id.text2},
+                new int[] {R.id.item_id,R.id.item_cdate,R.id.item_info,R.id.item_amount},
                 0);
         //將adapter設定給list清單元件
         list.setAdapter(adapter);
