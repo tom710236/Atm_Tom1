@@ -50,9 +50,11 @@ public class Main3Activity extends AppCompatActivity implements AdapterView.OnIt
             case R.drawable.c:
                 break;
             case R.drawable.d:
+                Intent intent = new Intent(this,FinanceActivity.class);
+                startActivity(intent);
                 break;
             case R.drawable.e:
-                Intent intent = new Intent(this,Main2Activity.class);
+                intent = new Intent(this, Main2Activity.class);
                 startActivity(intent);
                 break;
             case R.drawable.f:
