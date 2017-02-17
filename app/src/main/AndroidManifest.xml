@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tom.atm_tom1">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,8 @@
             android:name=".FinanceActivity"
             android:label="@string/title_activity_finance"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".addActivity"></activity>
+        <activity android:name=".addActivity" />
+        <activity android:name=".TransActivity"></activity>
     </application>
 
 </manifest>
